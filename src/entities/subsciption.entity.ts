@@ -7,10 +7,10 @@ export class Subscription  {
     id: ObjectID;
 
     @Column()
-    userid: string;
+    phone: number;
 
     @Column()
-    productId: [];
+    productId: number;
 
     @Column()
     status: string;
