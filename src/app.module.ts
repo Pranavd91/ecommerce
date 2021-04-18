@@ -14,17 +14,18 @@ import { UserModule } from './user/user.module';
 import { OrderModule } from './order/order.module';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { ProductModule } from './product/product.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksModule } from './tasks/tasks.module';
 var f = require('util').format
 var fs = require('fs');
-var ca = [fs.readFileSync("rds-combined-ca-bundle.pem")];
+//var ca = [fs.readFileSync("rds-combined-ca-bundle.pem")];
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     TypeOrmModule.forRoot({
       type: "mongodb",
-      url: 'mongodb+srv://root:root@cluster0.5fdik.gcp.mongodb.net/BatterySensorData?retryWrites=true&w=majority',
-      //url: 'mongodb://localhost:27017/demo',
-      database: "cb",
+      url: 'mongodb+srv://root:root@cluster0.m2xcq.mongodb.net/demo?retryWrites=true&w=majority',
       useNewUrlParser: true,
       synchronize: false,
       logging: true,
@@ -38,6 +39,7 @@ var ca = [fs.readFileSync("rds-combined-ca-bundle.pem")];
     OrderModule,
     SubscriptionModule,
     ProductModule,
+    TasksModule,
    
     
   ],

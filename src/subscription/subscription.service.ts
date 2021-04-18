@@ -22,4 +22,35 @@ export class SubscriptionService {
  
          return { show: { type: 'success', message: 'Subscription Data saved successfully' } }
      }
+
+
+     async updateDataProduct(realFilterDto: RealFilterDto): Promise<object> {
+        const { phone, productId } = realFilterDto;
+         const manager = getMongoRepository(Subscription);
+         const data = await manager.findOne({  phone: phone})
+         try {
+             data.productId=productId
+             await manager.save(data);
+ 
+         } catch (e) {
+             throw new InternalServerErrorException(e);
+         }
+ 
+         return { show: { type: 'success', message: 'Subscription Product Data Updated successfully' } }
+     }
+
+     async updateDataSubscription(realFilterDto: RealFilterDto): Promise<object> {
+        const { phone, status } = realFilterDto;
+         const manager = getMongoRepository(Subscription);
+         const data = await manager.findOne({  phone: phone})
+         try {
+                data.status=status
+                await manager.save(data);
+ 
+         } catch (e) {
+             throw new InternalServerErrorException(e);
+         }
+ 
+         return { show: { type: 'success', message: 'Subscription Data Updated successfully' } }
+     }
 }

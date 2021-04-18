@@ -1,4 +1,4 @@
-import { Controller, Post, Query } from '@nestjs/common';
+import { Controller, Post, Put, Query } from '@nestjs/common';
 import { RealFilterDto } from './dto/real-filter.dto';
 import { SubscriptionService } from './subscription.service';
 
@@ -8,7 +8,17 @@ export class SubscriptionController {
         private subscriptionService: SubscriptionService,
     ) { }
     @Post('create')
-    saveBatterySensor(@Query() realFilterDto: RealFilterDto) {
+    saveData(@Query() realFilterDto: RealFilterDto) {
         return this.subscriptionService.saveData(realFilterDto);
+    }
+
+    @Put('updateProduct')
+    updateData(@Query() realFilterDto: RealFilterDto) {
+        return this.subscriptionService.updateDataProduct(realFilterDto);
+    }
+
+    @Put('updateSubscription')
+    updateSubscription(@Query() realFilterDto: RealFilterDto) {
+        return this.subscriptionService.updateDataSubscription(realFilterDto);
     }
 }
