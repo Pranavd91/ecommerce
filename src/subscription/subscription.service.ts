@@ -14,13 +14,13 @@ export class SubscriptionService {
              data.phone=phone
              data.status="Active"
              data.productId=productId
-             await manager.save(data);
+             var result=await manager.save(data);
  
          } catch (e) {
              throw new InternalServerErrorException(e);
          }
  
-         return { show: { type: 'success', message: 'Subscription Data saved successfully' } }
+         return { show: { type: 'success', message: 'Subscription Data saved successfully' } ,result}
      }
 
 
@@ -30,13 +30,13 @@ export class SubscriptionService {
          const data = await manager.findOne({  phone: phone})
          try {
              data.productId=productId
-             await manager.save(data);
+            var result= await manager.save(data);
  
          } catch (e) {
              throw new InternalServerErrorException(e);
          }
  
-         return { show: { type: 'success', message: 'Subscription Product Data Updated successfully' } }
+         return { show: { type: 'success', message: 'Subscription Product Data Updated successfully' } ,result}
      }
 
      async updateDataSubscription(realFilterDto: RealFilterDto): Promise<object> {
@@ -45,12 +45,12 @@ export class SubscriptionService {
          const data = await manager.findOne({  phone: phone})
          try {
                 data.status=status
-                await manager.save(data);
+               var result= await manager.save(data);
  
          } catch (e) {
              throw new InternalServerErrorException(e);
          }
  
-         return { show: { type: 'success', message: 'Subscription Data Updated successfully' } }
+         return { show: { type: 'success', message: 'Subscription Data Updated successfully' } ,result}
      }
 }
